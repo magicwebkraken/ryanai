@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.png">
+    <title>RyanAir</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            background: linear-gradient(to bottom, #0a0a23, #1e1e5f); /* Space gradient */
+            color: #ffffff;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ffd700; /* Gold for headings */
+            text-shadow: 0 0 10px #ffd700;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #00ffcc; /* Neon cyan */
+            text-shadow: 0 0 5px #00ffcc;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: #00ffcc;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        /* Hero Section with Video Background */
+        #hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        #hero h1, #hero p {
+            position: relative;
+            z-index: 2;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #ffffff;
+        }
+
+        /* About Section */
+        #about {
+            background: #231a3881;
+        }
+
+        #about img {
+            width: 100%;
+            max-width: 400px;
+            margin: 8px 0;
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+        }
+
+        #about .dexscreener-chart {
+            max-width: 1500px;
+            margin: 2rem auto;
+            border: 3px solid #ffd700; /* Gold border to match theme */
+            border-radius: 15px;
+            overflow: hidden; /* Ensure iframe doesn't overflow */
+        }
+
+        #about .dexscreener-chart iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+
+        /* Community Section with Video Gallery */
+        #community {
+            background: #da7430;
+        }
+
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .video-gallery video {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border: 3px solid #00ffcc;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            pointer-events: none;
+        }
+
+        .video-gallery video:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00ffcc;
+        }
+
+        .video-gallery p {
+            margin: 0.5rem 0 1.5rem 0;
+            font-size: 1rem;
+            color: #ffd700;
+        }
+
+        /* Tokenomics Section */
+        #tokenomics {
+            background: #1e1e5f;
+        }
+
+        #tokenomics img {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem 0;
+        }
+
+        /* Call-to-Action Section */
+        #cta {
+            background: url('grokcoin-moon-mission.jpg') no-repeat center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        #cta::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        #cta h2, #cta button {
+            position: relative;
+            z-index: 1;
+        }
+
+        #cta button {
+            background: #ffd700;
+            color: #0a0a23;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #cta button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #f05b06;
+        }
+
+        /* Footer Meme Gallery */
+        #footer {
+            background: #0a0a23;
+            padding: 20px 10px;
+            font-size: 10px;
+        }
+
+        .meme-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap:80px;
+        }
+
+        .meme-gallery img {
+            width: 200px;
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#community">Community</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#cta">Buy Now</a>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section id="hero">
+        <video src="/video.mp4" alt="Replacement video" style="width: 100%; height: 100%;" autoplay muted>
+            Your browser does not support the video tag.
+          </video>
+        <h1>RyanAir</h1>RyanAir designs are typical for cryptocurrency tokens, aiming to create a recognizable and visually appealing symbol for the memecoin, often used for branding and marketing purposes in the crypto community.
+
+        explain memecoin design
+        
+        other memecoin examples
+        
+        </p>
+    </section>
+
+    <!-- About Section with DEXScreener Live Chart -->
+    <section id="about">
+        
+        <h2>Live RyanAir Chart</h2>
+        <p>Track RyanAir  performance in real-time with DEXScreener!</p>
+        <div class="dexscreener-chart">
+            <iframe src="https://dexscreener.com/ethereum/0xcomingsoon?embed=1&theme=dark&trades=0&info=0" width="100%" height="400" frameborder="0"></iframe>
+        </div>
+    </section>
+
+    <!-- Community Section with Auto-Playing Video Gallery -->
+    <section id="community">
+        <h2>Our Community RyanAir It!</h2>
+        <p>Check out our amazing community in action—join the RyanAir tribe!</p>
+        <div class="video-gallery">
+            <div>
+                <img src="/1.png" alt="Replacement image" style="width: 100%; height: auto;">
+                <p>Fans Showing Off RyanAir Tattoos</p>
+            </div>
+            <div>
+                <img src="/2.png" alt="Replacement image" style="width: 100%; height: auto;">
+                <p>RyanAir Community Meetup Highlights</p>
+            </div>
+            <div>
+                <img src="/3.png" alt="Replacement image" style="width: 100%; height: auto;">
+                <p>RyanAir Memes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics">
+        <h2>RyanAir TOKENOMICS</h2>
+        <p>Owenership Renounced</p>
+        <p>Lp Burnt</p>
+        <p>Sell/Buy Tax 0%</p>
+        <p>CA:0xcomingsoon</p>
+       
+    </section>
+
+
+    
+
+    <!-- Footer Meme Gallery -->
+    <section id="footer">
+        <h2>Contact US</h2>
+        <div class="meme-gallery ">
+            <a href="https://t.me/RyanAirgroup" target="_blank">
+                <h1  >Telegram</h1>
+            </a>
+            <a href="https://x.com/Ryan_Air_X" target="_blank">
+                <h1  alt="GrokCoin Meme 1">Twitter</h1>
+            </a>
+            <a href="https://app.uniswap.org/swap?inputCurrency=ETH&outputCurrency=0xcomingsoon" target="_blank">
+                <h1  alt="GrokCoin Meme 1">Buy RyanAir</h1>
+            </a>
+        </div>
+    </section>
+
+    <!-- Google Fonts for Futuristic Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</body>
+</html>
